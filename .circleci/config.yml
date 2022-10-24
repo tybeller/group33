@@ -3,9 +3,6 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.6.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: pip install -r requirements.txt
