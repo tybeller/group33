@@ -1,0 +1,6 @@
+{
+    "MongoDB":
+    {
+        "connection_string": "<put connection string here>"
+    }
+}
