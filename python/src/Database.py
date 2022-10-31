@@ -2,10 +2,7 @@ import json
 import pymongo
 
 class Database:
-    def __init__(self):
-        self.connect()
-        self.initializeDatabase()
-        self.initializeTables()
+    
 
     def connect(self):
         file = open("../../config.json")
@@ -16,37 +13,49 @@ class Database:
     def initializeDatabase(self):
         dbList = self.client.list_database_names()
         if "furever" not in dbList:
-            self.database = self.client["furever"]
+            self.database = self.client[self.name]
+            print("debug")
         
 
     # Checks if the necessary tables exist, if not, create the tables.
-    def initializeTables(self):
+    def initializeTables(self, tables): # tables is a list of tables
         tableList = self.database.list_collection_names()
-        if "dogs" not in tableList:
-            self.dogTable = self.database["dogs"]
-        if "users" not in tableList:
-            self.userTable = self.database["users"]
-        if "logins" not in tableList:
-            self.loginTable = self.database["logins"]
+        for x in tables:
+            if x not in tableList:
+                self.database[x]
+                self.database[x].insert_one({"_id": -1})
 
-    def insertDog(self, id, breed, sex, weight, age, location, attributes, images):
+    def updateDog(self, id, name, breed, sex, weight, age, location, attributes, images):
+        query = {"_id": id}
+        newvalues = {"$set": {"name": name, "breed": breed, "sex": sex, "weight": weight, "age": age, "location": location, "attributes": attributes, "images": images}}
+        table = self.database["dogs"]
+        table.update_one(query, newvalues)
+        # return boolean indicated whether successful update took place?
+
+    def insertDog(self, id, name, breed, sex, weight, age, location, attributes, images):
         # Check to see if the dog already exists in the database
         query = {"_id": id}
         table = self.database["dogs"]
         result = table.find(query)
-
-        if result is not None: # Dog already exists in table
-            return updateDog(id, breed, sex, weight, age, location, attributes, images) # update the existing dog's info instead
+        #if result is not None: # Dog already exists in table
+        #    return self.updateDog(id, name, breed, sex, weight, age, location, attributes, images) # update the existing dog's info instead
         
-        # Else, proceed to inserting dog into table
-        # TODO
+        dog = {"_id": id, "name": name, "breed": breed, "sex": sex, "weight": weight, "age": age, "location": location, "attributes": attributes, "images": images}
+        table.insert_one(dog)
 
-    def updateDog(self, id, breed, sex, weight, age, location, attributes, images):
+    def getDog(self, id):
         query = {"_id": id}
-        newvalues = {"$set": {"attributes": "attributes"}} # TODO
         table = self.database["dogs"]
-        table.update_one(query, newvalues)
-        # return boolean indicated whether successful update took place?
+        return table.find_one(query)
+
+    def printDog(self, id):
+        query = {"_id": id}
+        table = self.database["dogs"]
+        result = table.find(query)
+    
+        print("Result:")
+        for x in result:
+            print(x)
 
     # Insert user and their preferences
     def insertUser(self, id, preferences):
@@ -81,3 +90,9 @@ class Database:
             lastID = lastUser["_id"]
             newUser = {"_id": (lastID + 1), "username": username, "password" : password}
         return true
+
+    def __init__(self, name):
+        self.name = name
+        self.connect()
+        self.initializeDatabase()
+        self.initializeTables({"dogs", "users", "login"})
