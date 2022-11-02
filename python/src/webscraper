@@ -1,13 +1,58 @@
-import requests
+import time
 from bs4 import BeautifulSoup
-import pandas as pd 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0',
-}
-URL = "http://connect2concepts.com/connect2/?type=circle&key=8E2C21D2-6F5D-45C1-AF9E-C23AEBFDA68B"
+options = Options()
+options.add_argument('--headless')
+options.add_argument('--disable-gpu')  # Last I checked this was necessary.
+browser = webdriver.Chrome(chrome_options=options)
 
-page = requests.get(URL, headers=headers)
+URL = "https://www.shelterluv.com/embed/817?species=Dog&embedded=1&iframeId=shelterluv_wrap_1623960352721&columns=1#https%3A%2F%2Fwww.humanesocietyncfl.org%2Fadopt%2Fdogs-puppies%2F%2F%23sl_embed%26page%3Dshelterluv_wrap_1623960352721"
+browser.get(URL)
 
+time.sleep(9)
 
-soup = BeautifulSoup(page.content, "html.parser")
+p_element = browser.find_element("id", "app")
+html = browser.page_source
+homepage = BeautifulSoup(html, "lxml")
+
+idlist = []
+idclass = homepage.find_all("img", class_="w-full placeholder-photo")
+
+for i in idclass:
+    idlist.append(i['data-cy'])
+
+for id in idlist:
+    URL = "https://www.shelterluv.com/embed/animal/" + id
+
+    browser.get(URL)
+    html = browser.page_source
+    soup = BeautifulSoup(html, "lxml")
+
+    images = []
+
+    imageclass = soup.find_all("img", class_="cursor-pointer w-full")
+
+    for i in imageclass:
+        images.append(i['src'])
+
+    everything = soup.find_all("div", class_="inline-flex pl-2")
+
+    name = soup.find("h1", class_="text-2xl font-semibold mb-6").text.strip()    
+    pid = everything[0].text.strip()
+    breed = everything[1].text.strip()
+    sex = everything[2].text.strip()
+    weight = everything[3].text.strip()
+    age = everything[4].text.strip()
+    location = everything[5].text.strip()
+
+    alist = soup.find_all("div", class_="inline-flex px-4 py-2")
+
+    attributes = []
+    for a in alist:
+        attributes.append(a.text.strip())
+
+    description = soup.find("div", class_="mt-4 w-full md:w-8/12 md:pl-4 text-gray-600").text.strip()
+
+    adoptionlink="https://www.shelterluv.com/matchme/adopt/" + id
