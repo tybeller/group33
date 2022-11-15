@@ -20,4 +20,8 @@ Check the packages are installed correctly
 Upgrade version of pip  
 `python.exe -m pip install --upgrade pip`  
 
+# How to setup PyMongo/MongoDB
+1. Acquire the MongoDB connection string from Kevin.
+2. Put the connection string in config.json.
+3. Run pymongo_example.py to verify if setup was successful.
 
