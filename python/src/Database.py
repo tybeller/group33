@@ -5,7 +5,7 @@ class Database:
     
 
     def connect(self):
-        file = open("../../config.json")
+        file = open("config.json")
         config = json.load(file)
         self.client = pymongo.MongoClient(config["MongoDB"]["connection_string"]) 
         file.close()
@@ -13,7 +13,7 @@ class Database:
     # Checks if the database exists, if not, create the database.
     def initializeDatabase(self):
         dbList = self.client.list_database_names()
-        if "furever" not in dbList:
+        if self.name not in dbList:
             self.database = self.client[self.name]
 
     # Checks if the necessary tables exist, if not, create the tables.
@@ -24,23 +24,23 @@ class Database:
                 self.database[x]
                 self.database[x].insert_one({"_id": -1})
 
-    def updateDog(self, id, name, breed, sex, weight, age, location, attributes, images):
+    def updateDog(self, id, name, breed, sex, weight, age, location, attributes, images, description):
         query = {"_id": id}
-        newvalues = {"$set": {"name": name, "breed": breed, "sex": sex, "weight": weight, "age": age, "location": location, "attributes": attributes, "images": images}}
+        newvalues = {"$set": {"name": name, "breed": breed, "sex": sex, "weight": weight, "age": age, "location": location, "attributes": attributes, "images": images, "description": description}}
         table = self.database["dogs"]
         table.update_one(query, newvalues)
         # return boolean indicated whether successful update took place?
 
-    def insertDog(self, id, name, breed, sex, weight, age, location, attributes, images):
+    def insertDog(self, id, name, breed, sex, weight, age, location, attributes, images, description):
         # Check to see if the dog already exists in the database
         query = {"_id": id}
         table = self.database["dogs"]
         result = table.find_one(query)
         if result is None: # Dog does not exist in table already
-            dog = {"_id": id, "name": name, "breed": breed, "sex": sex, "weight": weight, "age": age, "location": location, "attributes": attributes, "images": images}
+            dog = {"_id": id, "name": name, "breed": breed, "sex": sex, "weight": weight, "age": age, "location": location, "attributes": attributes, "images": images, "description": description}
             table.insert_one(dog)
         else: #Dog already exists in table
-            return self.updateDog(id, name, breed, sex, weight, age, location, attributes, images) # update the existing dog's info instead
+            return self.updateDog(id, name, breed, sex, weight, age, location, attributes, images, description) # update the existing dog's info instead
         
     def getDog(self, id):
         query = {"_id": id}

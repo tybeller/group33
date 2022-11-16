@@ -2,6 +2,9 @@ import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import Database as DB
+
+database = DB.Database("Fur-ever_DB") #initializes database
 
 options = Options()
 options.add_argument('--headless')
@@ -29,11 +32,9 @@ for id in idlist:
     browser.get(URL)
     html = browser.page_source
     soup = BeautifulSoup(html, "lxml")
-
-    images = []
-
+    
     imageclass = soup.find_all("img", class_="cursor-pointer w-full")
-
+    images = []
     for i in imageclass:
         images.append(i['src'])
 
@@ -48,11 +49,16 @@ for id in idlist:
     location = everything[5].text.strip()
 
     alist = soup.find_all("div", class_="inline-flex px-4 py-2")
-
     attributes = []
     for a in alist:
         attributes.append(a.text.strip())
 
     description = soup.find("div", class_="mt-4 w-full md:w-8/12 md:pl-4 text-gray-600").text.strip()
+   
+    
+    database.insertDog(pid, name, breed, sex, weight, age, location, attributes, images, description)
+    database.printDog(pid)
 
     adoptionlink="https://www.shelterluv.com/matchme/adopt/" + id
+
+
