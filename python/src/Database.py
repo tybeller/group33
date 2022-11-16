@@ -12,9 +12,7 @@ class Database:
 
     # Checks if the database exists, if not, create the database.
     def initializeDatabase(self):
-        dbList = self.client.list_database_names()
-        if self.name not in dbList:
-            self.database = self.client[self.name]
+        self.database = self.client[self.name]
 
     # Checks if the necessary tables exist, if not, create the tables.
     def initializeTables(self, tables): # tables is a list of tables
