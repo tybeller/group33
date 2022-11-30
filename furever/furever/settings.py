@@ -84,16 +84,16 @@ WSGI_APPLICATION = 'furever.wsgi.application'
 
 DATABASES = {
     #TODO when filled out, replace default with djongo and rename default
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'djongo':{
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    #},
+    'default':{
         'ENGINE': 'djongo',
-        'NAME': 'INSERT CONNECTION NAME',
-        'HOST': '',
-        'USERNAME': '',
-        'PASSWORD': '', 
+        'NAME': 'furever-project',
+        'HOST': "mongodb+srv://cen3031_group33:ZvplKiIjX422THZt@fur-ever.czvudje.mongodb.net/?retryWrites=true&w=majority",
+        'USER': 'cen3031_group33',
+        'PASSWORD': 'ZvplKiIjX422THZt'
     }
 
 }
