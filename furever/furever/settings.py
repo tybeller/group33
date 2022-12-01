@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -81,19 +81,21 @@ WSGI_APPLICATION = 'furever.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+configPath = Path(__file__).resolve().parent.parent.parent / "config.json"
+file = open(configPath)
+config = json.load(file)
+connection_string = config["MongoDB"]["connection_string"]
+mongodb_username = config["MongoDB"]["username"]
+mongodb_password = config["MongoDB"]["password"]
+file.close()
 
 DATABASES = {
-    #TODO when filled out, replace default with djongo and rename default
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'djongo':{
+    'default':{
         'ENGINE': 'djongo',
-        'NAME': 'INSERT CONNECTION NAME',
-        'HOST': '',
-        'USERNAME': '',
-        'PASSWORD': '', 
+        'NAME': 'furever-project',
+        'HOST': connection_string,
+        'USER': mongodb_username,
+        'PASSWORD': mongodb_password,
     }
 
 }

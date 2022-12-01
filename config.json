@@ -1,6 +1,8 @@
 {
     "MongoDB":
     {
-        "connection_string": "<put connection string here>"
+        "connection_string": "<connection_string>",
+        "username": "<password>",
+        "password": "<password>"
     }
 }
