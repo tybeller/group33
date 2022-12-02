@@ -1,9 +1,10 @@
 import '../index.css';
+import DogSwipe from '../components/DogSwipe'
 function Home() {
   return(
   <div className="App bg-red-300">
     <header classname="App-header">
-      Home page!!!
+        <DogSwipe/>
     </header>
   </div>
   );
