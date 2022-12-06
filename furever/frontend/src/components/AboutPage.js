@@ -4,16 +4,7 @@ import '../App.css';
 
 function AboutPage () {
     return (
-        //<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/cerulean/bootstrap.min.css" media="all" />
         <div className='AboutPage'>
-          <link
-            href='https://fonts.googleapis.com/css?family=Damion&display=swap'
-            rel='stylesheet'
-          />
-          <link
-            href='https://fonts.googleapis.com/css?family=Alatsi&display=swap'
-            rel='stylesheet'
-          />
           <h1>The Fur-Ever Team</h1>
           <div classname='Info'>
             <h2>Our Mission</h2>
