@@ -1,8 +1,8 @@
 {
     "MongoDB":
     {
-        "connection_string": "<connection_string>",
-        "username": "<password>",
-        "password": "<password>"
+        "connection_string": "mongodb+srv://cen3031_group33:ZvplKiIjX422THZt@fur-ever.czvudje.mongodb.net/?retryWrites=true&w=majority",
+        "username": "cen3031_group33",
+        "password": "ZvplKiIjX422THZt"
     }
 }

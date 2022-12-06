@@ -6,6 +6,9 @@ import Users from './pages/Users';
 import Dogs from './pages/Dogs';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Profile from './pages/Profile';
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 
 function App() {
   return (
