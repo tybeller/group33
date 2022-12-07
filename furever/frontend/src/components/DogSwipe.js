@@ -81,7 +81,7 @@ function DogSwipe () {
         />
         <h1>Fur-Ever</h1>
         <div className='cardContainer'>
-          {db.map((character, index) => (
+          {db.slice().reverse().map((character, index) => (
             <TinderCard
               ref={childRefs[index]}
               className='swipe'
@@ -103,15 +103,9 @@ function DogSwipe () {
           <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
           <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
         </div>
-        {lastDirection ? (
-          <h2 key={lastDirection} className='infoText'>
-            You swiped {lastDirection}
-          </h2>
-        ) : (
-          <h2 className='infoText'>
-            Swipe right to match and left to pass.
-          </h2>
-        )}
+        <div className="swipe_status">
+            {lastDirection ? lastDirection == 'right' ? (<h3>You Matched!</h3>) : (<h4>Pass</h4>) : (<h5>Swipe right to match and left to pass.</h5>)}
+        </div>
       </div>
     )
   }
