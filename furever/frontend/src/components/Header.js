@@ -1,12 +1,12 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { NavLink } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Home', href: '/home', current: true },
-  { name: 'About', href: '/about', current: false },
-  { name: 'Dogs', href: '/dogs', current: false },
-  { name: 'Users', href: '/users', current: false },
+  { name: 'Home', href: '/home'},
+  { name: 'About', href: '/about' },
+  { name: 'Dogs', href: '/dogs',  },
 ]
 
 function classNames(...classes) {
@@ -47,17 +47,24 @@ export default function Header(props) {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <NavLink
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         className={classNames(
                           item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        // className={({isActive}) => {
+                        //   return (
+                        //     item.current 'bg'
+                        //     'px-3 py-2 rounded-md text-sm font-medium' +
+                        //     (isActive
+                        //       ? 'hover:bg-gray-900 text-white'
+                        //       : 'text-blue hover:bg-gray-700 hover:text-white')
+                        //   );
                       >
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
@@ -106,7 +113,7 @@ export default function Header(props) {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/logout"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
