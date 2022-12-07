@@ -64,21 +64,21 @@ h1 {
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
 }
 
-.swipe_status match {
+.swipe_status h3 {
   font-size: 35px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: green;
   font-weight: bold;
 }
 
-.swipe_status pass {
+.swipe_status h4 {
   font-size: 35px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: red;
   font-weight: bold;
 }
 
-.swipe_status neutral {
+.swipe_status h5 {
   font-size: 35px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: white;

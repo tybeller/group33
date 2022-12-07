@@ -104,7 +104,7 @@ function DogSwipe () {
           <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
         </div>
         <div className="swipe_status">
-            {lastDirection ? lastDirection == 'right' ? (<match>You Matched!</match>) : (<pass>Pass</pass>) : (<neutral>Swipe right to match and left to pass.</neutral>)}
+            {lastDirection ? lastDirection == 'right' ? (<h3>You Matched!</h3>) : (<h4>Pass</h4>) : (<h5>Swipe right to match and left to pass.</h5>)}
         </div>
       </div>
     )
