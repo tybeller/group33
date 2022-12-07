@@ -1,4 +1,5 @@
 import '../index.css';
+
 function About() {
   return(
   <div className="App bg-red-300">
