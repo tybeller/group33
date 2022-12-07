@@ -57,6 +57,25 @@ h1 {
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
 }
 
+.AboutPage {
+  margin: 20px;
+  height: 100vh;
+}
+
+.AboutPage h1 {
+  color: #000;
+}
+
+.info h2 {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000;
+}
+
+.aboutpage {
+  height: 500px;
+  color: #000;
+}
+
 .dog_name h3 {
   font-size: 100px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
