@@ -57,28 +57,28 @@ h1 {
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
 }
 
-dog_name {
+.dog_name h3 {
   font-size: 100px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #000;
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
 }
 
-rightswipe {
+.swipe_status match {
   font-size: 35px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: green;
   font-weight: bold;
 }
 
-leftswipe {
+.swipe_status pass {
   font-size: 35px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: red;
   font-weight: bold;
 }
 
-neutral {
+.swipe_status neutral {
   font-size: 35px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: white;

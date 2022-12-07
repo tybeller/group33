@@ -27,7 +27,7 @@ function Dogs() {
       {db.map((dog) => (
       <div className = "dog_container">
         <img src= {JSON.parse(dog.images)[0]} width="200" id="dog_profile"></img>
-        <dog_name>{dog.name}<br/></dog_name>
+        <div className="dog_name"><h3>{dog.name}</h3><br/></div>
           <b>Breed:</b> {dog.breed}<br/>
           <b>Sex:</b> {dog.sex}<br/>
           <b>Weight:</b> {dog.weight}<br/>

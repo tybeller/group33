@@ -103,7 +103,9 @@ function DogSwipe () {
           <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
           <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
         </div>
-        {lastDirection ? lastDirection == 'right' ? (<h4>You Matched!</h4>) : (<h5>Pass</h5>) : (<h6>Swipe right to match and left to pass.</h6>)}
+        <div className="swipe_status">
+            {lastDirection ? lastDirection == 'right' ? (<match>You Matched!</match>) : (<pass>Pass</pass>) : (<neutral>Swipe right to match and left to pass.</neutral>)}
+        </div>
       </div>
     )
   }
